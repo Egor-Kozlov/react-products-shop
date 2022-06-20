@@ -1,0 +1,41 @@
+.products {
+    width: 100%;
+
+    &__list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+
+    &__item {
+        width: 386px;
+        height: 444px;
+        padding: 16px;
+    }
+}
+
+.item__image {
+    width: 354px;
+    height: 330px;
+    object-fit: cover;
+    margin-bottom: 24px;
+}
+
+.item__title {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 160%;
+    color: #1D1F22;
+}
+
+.item__cost {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 160%;
+    color: #1D1F22;
+}

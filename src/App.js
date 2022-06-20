@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 import Category from "./pages/Category/Category";
-import { GET_ALL_CATEGORIES } from "./query/categories";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 const client = new ApolloClient({
@@ -9,20 +10,14 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-// client
-//   .query({
-//     query: GET_ALL_CATEGORIES,
-//   })
-//   .then((result) => console.log(result));
-
 class App extends Component {
-  // get categories from apollo client
-
   render() {
     return (
-      <ApolloProvider client={client}>
-        <Category client={client} />;
-      </ApolloProvider>
+      <Provider store={store}>
+        <ApolloProvider client={client}>
+          <Category client={client} />
+        </ApolloProvider>
+      </Provider>
     );
   }
 }

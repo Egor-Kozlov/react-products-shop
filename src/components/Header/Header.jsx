@@ -7,6 +7,7 @@ import { graphql } from '@apollo/client/react/hoc';
 import { GET_ALL_CATEGORIES } from '../../query/categories';
 import { GET_ALL_CURRENCIES } from '../../query/currencies';
 import apolloRequest from '../../query/apolloRequest'
+import withGraphQL from './HeaderHOC';
 
 export class Header extends Component {
 
@@ -64,4 +65,4 @@ export class Header extends Component {
     }
 }
 
-export default graphql(GET_ALL_CATEGORIES)(Header);
+export default withGraphQL(Header);

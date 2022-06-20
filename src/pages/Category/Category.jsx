@@ -7,6 +7,9 @@ import { GET_ALL_CATEGORIES } from '../../query/categories';
 import { GET_PRODUCTS_ONE_CATEGORY } from '../../query/productsOneType';
 import apolloRequest from '../../query/apolloRequest';
 import withGraphQL from './CategoryHOC';
+import bigFirstLetter from '../../modules/bigFirstLetter';
+import ProductsList from '../../components/Products/ProductsList/ProductsList';
+import { connect } from 'react-redux';
 
 export class Category extends Component {
 
@@ -14,34 +17,52 @@ export class Category extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: 'ALL',
+            currentCategory: 'all',
             currentProducts: [],
+            isLoadingProducts: false
         }
     }
 
     onClickCategory = (categoryName) => {
-        console.log(categoryName);
+        this.setState({ currentCategory: categoryName })
+        console.log(this.state.currentCategory);
     }
 
-    componentDidMount() {
+    getCategoryProducts = () => {
         const { data } = this.props;
-        const { name } = this.state;
-
+        const { currentCategory } = this.state;
+        console.log('currentCategory: ', currentCategory);
+        this.setState({ isLoadingProducts: true })
         data.fetchMore({
-            variables: { name },
-            updateQuery: (previousResult, { fetchMoreResult }) => fetchMoreResult,
+            variables: { currentCategory },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+                this.setState({
+                    currentProducts: fetchMoreResult.category.products,
+                    isLoadingProducts: false
+                })
+            },
         });
     }
 
-    // getProducts = () => {
-    //     apolloRequest(this.props.client, GET_PRODUCTS_ONE_CATEGORY)
-    // }
+    componentDidMount() {
+        this.setState({ isLoadingProducts: true })
+        this.getCategoryProducts()
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.currentCategory !== this.state.currentCategory) {
+            this.getCategoryProducts()
+        }
+    }
 
     render() {
         return (
             <div className='category'>
                 <Header onClickCategory={this.onClickCategory} client={this.props.client} />
-                Category
+                <div className="wrapper">
+                    <h2 className='category__title'>{bigFirstLetter(this.state.currentCategory)}</h2>
+                    <ProductsList loading={this.state.isLoadingProducts} products={this.state.currentProducts} />
+                </div>
             </div>
         )
     }
