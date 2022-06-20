@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import Category from "./pages/Category/Category";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import Test from "./components/Test/Test";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/graphql",
@@ -15,6 +16,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <ApolloProvider client={client}>
+          <Test />
           <Category client={client} />
         </ApolloProvider>
       </Provider>

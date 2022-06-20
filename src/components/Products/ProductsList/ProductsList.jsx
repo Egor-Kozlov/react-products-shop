@@ -5,10 +5,6 @@ import "./ProductsList.scss";
 
 export class ProductsList extends Component {
 
-    componentDidMount() {
-        console.log(this.props.products);
-    }
-
     render() {
         return (
             <div className='products'>
