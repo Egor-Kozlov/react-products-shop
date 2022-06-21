@@ -6,6 +6,7 @@ export const GET_PRODUCTS_ONE_CATEGORY = gql`
       products {
         name
         id
+        inStock
         prices {
           currency {
             label
@@ -18,14 +19,3 @@ export const GET_PRODUCTS_ONE_CATEGORY = gql`
     }
   }
 `;
-
-// export const GET_PRODUCTS_ONE_CATEGORY = gql`
-//   query {
-//     category {
-//       products {
-//         name
-//         id
-//       }
-//     }
-//   }
-// `;

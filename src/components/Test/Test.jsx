@@ -6,11 +6,15 @@ import { setCurrency } from '../../store/slices/currency'
 export class Test extends Component {
 
     componentDidMount() {
-        console.log(this.props)
+        // console.log(this.props)
     }
 
     setCurrencyOnStore = () => {
-        this.props.setCurrency({ currency: '123' })
+        // this.props.setCurrency(
+        //     {
+        //         label: "123",
+        //         symbol: "312"
+        //     })
         console.log(this.props)
     }
 
@@ -25,11 +29,17 @@ export class Test extends Component {
 }
 
 //get initial state from reducer
-function mapDispatchToProps(dispatch) {
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         dispatch
+//     }
+// }
+
+const mapStateToProps = (state) => {
     return {
-        dispatch
+        currency: state.currencyReducer
     }
 }
+// const mapDispatchToProps = { setCurrency };
 
-
-export default connect(mapDispatchToProps, { setCurrency })(Test)
+export default connect(mapStateToProps, { setCurrency })(Test)

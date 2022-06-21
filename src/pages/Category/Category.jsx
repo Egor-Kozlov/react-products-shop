@@ -19,13 +19,13 @@ export class Category extends Component {
         this.state = {
             currentCategory: 'all',
             currentProducts: [],
-            isLoadingProducts: false
+            isLoadingProducts: false,
+            currentCurrency: this.props.currency
         }
     }
 
     onClickCategory = (categoryName) => {
         this.setState({ currentCategory: categoryName })
-        console.log(this.state.currentCategory);
     }
 
     getCategoryProducts = () => {
@@ -47,6 +47,7 @@ export class Category extends Component {
     componentDidMount() {
         this.setState({ isLoadingProducts: true })
         this.getCategoryProducts()
+        this.setState({ currentCurrency: this.props.currency })
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -58,10 +59,10 @@ export class Category extends Component {
     render() {
         return (
             <div className='category'>
-                <Header onClickCategory={this.onClickCategory} client={this.props.client} />
+                <Header onChangeCurrency={this.onChangeCurrency} onClickCategory={this.onClickCategory} client={this.props.client} currentCategory={this.state.currentCategory} />
                 <div className="wrapper">
                     <h2 className='category__title'>{bigFirstLetter(this.state.currentCategory)}</h2>
-                    <ProductsList loading={this.state.isLoadingProducts} products={this.state.currentProducts} />
+                    <ProductsList currentCurrency={this.props.currency} loading={this.state.isLoadingProducts} products={this.state.currentProducts} />
                 </div>
             </div>
         )

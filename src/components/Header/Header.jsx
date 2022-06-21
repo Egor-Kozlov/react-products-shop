@@ -16,7 +16,7 @@ export class Header extends Component {
         this.state = {
             categories: [],
             showList: false,
-            defaultSelectText: "Please select an option",
+            defaultValue: "$",
             currenciesList: []
         };
     }
@@ -31,6 +31,16 @@ export class Header extends Component {
             .then((result) => this.setState({ currenciesList: result.data.currencies }))
     }
 
+    //set current currency to store
+    onChangeCurrency = (label, symbol) => {
+        this.props.setCurrency(
+            {
+                label: label,
+                symbol: symbol
+            })
+        console.log(this.props.currency);
+    }
+
     componentDidMount() {
         this.getCategories()
         this.getCurrencies()
@@ -43,7 +53,7 @@ export class Header extends Component {
                     <nav className='categories'>
                         <ul className='categories__list'>
                             {this.state.categories.map((category) => {
-                                return <li onClick={(e) => this.props.onClickCategory(e.target.innerText.toLowerCase())} className='categories__item' key={category.name}>{category.name}</li>
+                                return <li onClick={(e) => this.props.onClickCategory(e.target.innerText.toLowerCase())} className={`categories__item ${this.props.currentCategory === category.name && 'categories__item--active'}`} key={category.name}>{category.name}</li>
                             })}
                         </ul>
                     </nav>
@@ -52,7 +62,8 @@ export class Header extends Component {
                     </div>
                     <div className="header__actions">
                         <CustomSelect
-                            defaultText={this.state.defaultSelectText}
+                            onChangeCurrency={this.onChangeCurrency}
+                            defaultText={this.state.defaultValue}
                             optionsList={this.state.currenciesList}
                         />
                         <div className='cart'>

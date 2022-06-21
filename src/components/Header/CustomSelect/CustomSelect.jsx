@@ -1,15 +1,17 @@
 import React from "react";
+import cutStringBeforeFirstSpace from "../../../modules/cutStringBeforeFirstSpace";
 import './CustomSelect.scss';
+import SelectArrow from "../../../pictures/icons/select-arrow.svg";
 
 class CustomSelect extends React.Component {
     constructor(props) {
         super(props);
 
-        // @defaultSelectText => Show default text in select
+        // @selectedValue => Show default text in select
         // @showOptionList => Show / Hide List options
         // @optionsList => List of options
         this.state = {
-            defaultSelectText: "",
+            selectedValue: "",
             showOptionList: false,
             optionsList: []
         };
@@ -20,7 +22,7 @@ class CustomSelect extends React.Component {
         // the Custom Select Container
         document.addEventListener("mousedown", this.handleClickOutside);
         this.setState({
-            defaultSelectText: this.props.defaultText
+            selectedValue: this.props.defaultText
         });
     }
 
@@ -53,23 +55,25 @@ class CustomSelect extends React.Component {
 
     // This method handles the setting of name in select text area
     // and list display on selection
-    handleOptionClick = e => {
+    handleOptionClick = (e, option) => {
         this.setState({
-            defaultSelectText: e.target.getAttribute("data-name"),
+            selectedValue: e.target.getAttribute("data-name"),
             showOptionList: false
         });
+        this.props.onChangeCurrency(option.label, option.symbol);
     };
 
     render() {
         const { optionsList } = this.props;
-        const { showOptionList, defaultSelectText } = this.state;
+        const { showOptionList, selectedValue } = this.state;
         return (
             <div className="custom-select-container">
                 <div
                     className={showOptionList ? "selected-text active" : "selected-text"}
                     onClick={this.handleListDisplay}
                 >
-                    {defaultSelectText[0]}
+                    {cutStringBeforeFirstSpace(selectedValue)}
+                    <img className={`select__arrow ${showOptionList ? 'select__arrow--active' : null}`} src={SelectArrow} alt="select-arrow" />
                 </div>
                 {showOptionList && (
                     <ul className="select-options">
@@ -79,7 +83,7 @@ class CustomSelect extends React.Component {
                                     className="custom-select-option"
                                     data-name={option.symbol}
                                     key={option.label}
-                                    onClick={this.handleOptionClick}
+                                    onClick={(event) => this.handleOptionClick(event, option)}
                                 >
                                     {option.symbol} {option.label}
                                 </li>
