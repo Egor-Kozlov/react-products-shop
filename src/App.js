@@ -16,7 +16,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <ApolloProvider client={client}>
-          <Test />
+          {/* <Test /> */}
           <Category client={client} />
         </ApolloProvider>
       </Provider>

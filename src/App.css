@@ -7,6 +7,23 @@ font-family: 'Roboto', sans-serif; */
   box-sizing: border-box;
 }
 
+body {
+  overflow-y: scroll;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+body::-webkit-scrollbar-track {
+  background-color: #dfdfdf;
+  border-radius: 10px;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #5ece7cb4;
+  border-radius: 10px;
+}
+
 .App {
   font-family: 'Raleway', sans-serif;
 }
