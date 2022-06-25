@@ -6,7 +6,6 @@ import SelectArrow from "../../../pictures/icons/select-arrow.svg";
 class CustomSelect extends React.Component {
     constructor(props) {
         super(props);
-
         // @selectedValue => Show default text in select
         // @showOptionList => Show / Hide List options
         // @optionsList => List of options

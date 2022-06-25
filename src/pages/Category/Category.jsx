@@ -1,18 +1,11 @@
 import React, { Component } from 'react'
 import Header from '../../components/Header/Header'
 import './Category.scss'
-import { gql } from "@apollo/client";
-import { graphql } from '@apollo/client/react/hoc';
-import { GET_ALL_CATEGORIES } from '../../query/categories';
-import { GET_PRODUCTS_ONE_CATEGORY } from '../../query/productsOneType';
-import apolloRequest from '../../query/apolloRequest';
-import withGraphQL from './CategoryHOC';
+import ReduxWithGraphQL from './CategoryHOC';
 import bigFirstLetter from '../../modules/bigFirstLetter';
 import ProductsList from '../../components/Products/ProductsList/ProductsList';
-import { connect } from 'react-redux';
 
 export class Category extends Component {
-
 
     constructor(props) {
         super(props);
@@ -20,7 +13,6 @@ export class Category extends Component {
             currentCategory: 'all',
             currentProducts: [],
             isLoadingProducts: false,
-            currentCurrency: this.props.currency
         }
     }
 
@@ -69,4 +61,4 @@ export class Category extends Component {
     }
 }
 
-export default withGraphQL(Category);
+export default ReduxWithGraphQL(Category);

@@ -9,6 +9,7 @@ const withGraphQL = graphql(GET_ALL_CATEGORIES);
 const mapStateToProps = (state) => {
   return {
     currency: state.currencyReducer,
+    basket: state.basketReducer,
   };
 };
 

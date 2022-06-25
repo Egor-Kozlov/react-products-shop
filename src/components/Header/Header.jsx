@@ -3,20 +3,23 @@ import "./Header.scss";
 import Logo from "./../../pictures/icons/main-logo.svg";
 import Cart from "./../../pictures/icons/shopping-cart-empty.svg";
 import CustomSelect from "./CustomSelect/CustomSelect";
-import { graphql } from "@apollo/client/react/hoc";
 import { GET_ALL_CATEGORIES } from "../../query/categories";
 import { GET_ALL_CURRENCIES } from "../../query/currencies";
 import apolloRequest from "../../query/apolloRequest";
-import withGraphQL from "./HeaderHOC";
+import ReduxWithGraphQL from "./HeaderHOC";
+import Basket from "./Basket/Basket";
 
 export class Header extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             categories: [],
             showList: false,
             defaultValue: "$",
             currenciesList: [],
+            showBasket: false,
+            // basketCount: this.props.basket.length,
         };
     }
 
@@ -42,6 +45,7 @@ export class Header extends Component {
     componentDidMount() {
         this.getCategories();
         this.getCurrencies();
+        console.log(this.props);
     }
 
     render() {
@@ -72,15 +76,16 @@ export class Header extends Component {
                             defaultText={this.state.defaultValue}
                             optionsList={this.state.currenciesList}
                         />
-                        <div className="cart">
+                        <div className="cart" onClick={() => this.setState({ showBasket: !this.state.showBasket })}>
                             <img className="cart__img" src={Cart} alt="cart" />
-                            <div className="cart__counter">3</div>
+                            {this.props.basket.length > 0 ? <div className="cart__counter">{this.props.basket.length}</div> : null}
                         </div>
                     </div>
+                    {this.state.showBasket && <Basket disableBasket={() => this.setState({ showBasket: false })} />}
                 </div>
             </header>
         );
     }
 }
 
-export default withGraphQL(Header);
+export default ReduxWithGraphQL(Header);

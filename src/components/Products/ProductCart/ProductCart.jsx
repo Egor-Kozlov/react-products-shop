@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './ProductCart.scss';
 import Cart from '../../../pictures/icons/shopping-cart-card.svg'
+import Redux from './ProductCartHOC';
 
 export class ProductCart extends Component {
 
@@ -13,10 +14,22 @@ export class ProductCart extends Component {
 
     onCartMouse = () => {
         this.setState({ mouseOver: true })
+        console.log(this.props);
     }
 
     onCartMouseOut = () => {
         this.setState({ mouseOver: false })
+    }
+
+    onAddToBasket = (product) => {
+        this.props.addToBasket({
+            id: product.id,
+            title: product.title,
+            brand: product.brand,
+            image: product.image,
+            prices: product.prices,
+            attributes: product.attributes
+        })
     }
 
     render() {
@@ -25,17 +38,17 @@ export class ProductCart extends Component {
                 <div className='item__image-container'>
                     <img className={`item__image ${!this.props.inStock && 'item__image--disabled'}`} src={this.props.image} alt={this.props.name} />
                     {!this.props.inStock ? <p className='item__out-of-stock'>out of stock</p> : null}
-                    {this.state.mouseOver && this.props.inStock &&
-                        <div className='item__cart-btn'>
+                    {this.props.inStock &&
+                        <div onClick={() => this.onAddToBasket(this.props)} className='item__cart-btn'>
                             <img className='cart-btn__image' src={Cart} alt="button cart" />
                         </div>
                     }
                 </div>
-                <p className={`item__title ${!this.props.inStock && 'item__title--disabled'}`}>{this.props.title}</p>
+                <p className={`item__title ${!this.props.inStock && 'item__title--disabled'}`}>{this.props.brand} {this.props.title}</p>
                 <p className={`item__cost ${!this.props.inStock && 'item__cost--disabled'}`}>{this.props.price}</p>
             </li>
         )
     }
 }
 
-export default ProductCart
+export default Redux(ProductCart) 

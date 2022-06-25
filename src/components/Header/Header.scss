@@ -53,7 +53,9 @@
     .categories__item:hover {
         color: #5ECE7B;
     }
+
 }
+
 
 .header__logo {
     width: 41px;
@@ -88,6 +90,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    cursor: pointer;
     
     &__counter {
         width: 17px;
@@ -110,3 +113,5 @@
         color: rgb(255, 255, 255);
     }
 }
+
+
