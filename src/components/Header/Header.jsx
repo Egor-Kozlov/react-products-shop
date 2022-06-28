@@ -8,6 +8,8 @@ import { GET_ALL_CURRENCIES } from "../../query/currencies";
 import apolloRequest from "../../query/apolloRequest";
 import ReduxWithGraphQL from "./HeaderHOC";
 import Basket from "./Basket/Basket";
+import { Link } from "react-router-dom";
+import itemsQuantity from "../../modules/itemsQuantity";
 
 export class Header extends Component {
     constructor(props) {
@@ -19,12 +21,14 @@ export class Header extends Component {
             defaultValue: "$",
             currenciesList: [],
             showBasket: false,
-            // basketCount: this.props.basket.length,
         };
     }
 
     getCategories = () => {
-        apolloRequest(this.props.client, GET_ALL_CATEGORIES).then((result) => this.setState({ categories: result.data.categories }));
+        apolloRequest(this.props.client, GET_ALL_CATEGORIES).then((result) => {
+            this.setState({ categories: result.data.categories })
+            this.props.onChangeCurrentCategory({ currentCategory: result.data.categories[0].name })
+        });
     };
 
     getCurrencies = () => {
@@ -45,7 +49,6 @@ export class Header extends Component {
     componentDidMount() {
         this.getCategories();
         this.getCurrencies();
-        console.log(this.props);
     }
 
     render() {
@@ -56,13 +59,14 @@ export class Header extends Component {
                         <ul className="categories__list">
                             {this.state.categories.map((category) => {
                                 return (
-                                    <li
-                                        onClick={(e) => this.props.onClickCategory(e.target.innerText.toLowerCase())}
-                                        className={`categories__item ${this.props.currentCategory === category.name && "categories__item--active"}`}
-                                        key={category.name}
-                                    >
-                                        {category.name}
-                                    </li>
+                                    <Link to={'/'} key={category.name}>
+                                        <li
+                                            onClick={(e) => this.props.onChangeCurrentCategory({ currentCategory: e.target.innerText.toLowerCase() })}
+                                            className={`categories__item ${this.props.currentCategory === category.name && "categories__item--active"}`}
+                                        >
+                                            {category.name}
+                                        </li>
+                                    </Link>
                                 );
                             })}
                         </ul>
@@ -78,7 +82,7 @@ export class Header extends Component {
                         />
                         <div className="cart" onClick={() => this.setState({ showBasket: !this.state.showBasket })}>
                             <img className="cart__img" src={Cart} alt="cart" />
-                            {this.props.basket.length > 0 ? <div className="cart__counter">{this.props.basket.length}</div> : null}
+                            {this.props.basket.length > 0 ? <div className="cart__counter">{itemsQuantity(this.props.basket)}</div> : null}
                         </div>
                     </div>
                     {this.state.showBasket && <Basket disableBasket={() => this.setState({ showBasket: false })} />}

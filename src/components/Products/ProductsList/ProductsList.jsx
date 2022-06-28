@@ -22,7 +22,7 @@ export class ProductsList extends Component {
                             id={product.id}
                             title={product.name}
                             brand={product.brand}
-                            image={product.gallery[0]}
+                            image={product.gallery}
                             price={this.searchCurrentPrice(product)}
                             prices={product.prices}
                             inStock={product.inStock}

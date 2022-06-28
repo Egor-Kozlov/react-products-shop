@@ -30,7 +30,7 @@ export class BasketItem extends Component {
                     <div onClick={() => this.props.onRemoveItem(this.props.item.id)} className="counter__btn">-</div>
                 </div>
                 <div className="item__img">
-                    <img src={this.props.item.image} alt={this.props.item.title} />
+                    <img src={this.props.item.image[0]} alt={this.props.item.title} />
                 </div>
             </li>
         )

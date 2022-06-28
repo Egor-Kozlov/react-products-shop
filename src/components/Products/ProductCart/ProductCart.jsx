@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
-import './ProductCart.scss';
-import Cart from '../../../pictures/icons/shopping-cart-card.svg'
-import Redux from './ProductCartHOC';
+import React, { Component } from "react";
+import "./ProductCart.scss";
+import Cart from "../../../pictures/icons/shopping-cart-card.svg";
+import Redux from "./ProductCartHOC";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export class ProductCart extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
-            mouseOver: false
+            mouseOver: false,
         };
     }
 
     onCartMouse = () => {
-        this.setState({ mouseOver: true })
+        this.setState({ mouseOver: true });
         console.log(this.props);
-    }
+    };
 
     onCartMouseOut = () => {
-        this.setState({ mouseOver: false })
-    }
+        this.setState({ mouseOver: false });
+    };
 
     onAddToBasket = (product) => {
         this.props.addToBasket({
@@ -28,27 +28,40 @@ export class ProductCart extends Component {
             brand: product.brand,
             image: product.image,
             prices: product.prices,
-            attributes: product.attributes
-        })
-    }
+            attributes: product.attributes,
+        });
+    };
 
     render() {
         return (
-            <li onMouseOver={this.onCartMouse} onMouseOut={this.onCartMouseOut} className='products__item' key={this.props.id}>
-                <div className='item__image-container'>
-                    <img className={`item__image ${!this.props.inStock && 'item__image--disabled'}`} src={this.props.image} alt={this.props.name} />
-                    {!this.props.inStock ? <p className='item__out-of-stock'>out of stock</p> : null}
-                    {this.props.inStock &&
-                        <div onClick={() => this.onAddToBasket(this.props)} className='item__cart-btn'>
-                            <img className='cart-btn__image' src={Cart} alt="button cart" />
-                        </div>
-                    }
-                </div>
-                <p className={`item__title ${!this.props.inStock && 'item__title--disabled'}`}>{this.props.brand} {this.props.title}</p>
-                <p className={`item__cost ${!this.props.inStock && 'item__cost--disabled'}`}>{this.props.price}</p>
+            <li onMouseOver={this.onCartMouse} onMouseOut={this.onCartMouseOut} className="products__item" key={this.props.id}>
+                {this.props.inStock && (
+                    <div
+                        onClick={() => {
+                            this.onAddToBasket(this.props);
+                        }}
+                        className="item__cart-btn"
+                    >
+                        <img className="cart-btn__image" src={Cart} alt="button cart" />
+                    </div>
+                )}
+                <Link to={`/product/${this.props.id}`}>
+                    <div className="item__image-container">
+                        <img
+                            className={`item__image ${!this.props.inStock && "item__image--disabled"}`}
+                            src={this.props.image[0]}
+                            alt={this.props.name}
+                        />
+                        {!this.props.inStock ? <p className="item__out-of-stock">out of stock</p> : null}
+                    </div>
+                    <p className={`item__title ${!this.props.inStock && "item__title--disabled"}`}>
+                        {this.props.brand} {this.props.title}
+                    </p>
+                    <p className={`item__cost ${!this.props.inStock && "item__cost--disabled"}`}>{this.props.price}</p>
+                </Link>
             </li>
-        )
+        );
     }
 }
 
-export default Redux(ProductCart) 
+export default Redux(ProductCart);

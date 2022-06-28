@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./Basket.scss";
 import ReduxWithGraphQL from "./BasketHOC";
 import BasketItem from "./BasketItem/BasketItem";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import itemsQuantity from "../../../modules/itemsQuantity";
 
 export class Basket extends Component {
     constructor(props) {
@@ -63,7 +65,7 @@ export class Basket extends Component {
                 {this.props.basket.length > 0 ? (
                     <>
                         <h4 className="basket__title">
-                            My Bag, <span className="basket__title--light">{this.props.basket.length} items</span>
+                            My Bag, <span className="basket__title--light">{itemsQuantity(this.props.basket)} items</span>
                         </h4>
                         <ul className={`basket__list ${this.props.basket.length > 2 && "basket__list--scroll"}`}>
                             {this.props.basket.map((item) => (
@@ -84,8 +86,12 @@ export class Basket extends Component {
                             </p>
                         </div>
                         <div className="basket__buttons--container">
-                            <div className="btn--view">View bag</div>
-                            <div className="btn--check-out">Check out</div>
+                            <Link to={'/cart'}>
+                                <div className="btn--view">View bag</div>
+                            </Link>
+                            <Link to={'/cart'}>
+                                <div className="btn--check-out">Check out</div>
+                            </Link>
                         </div>
                     </>
                 ) : (

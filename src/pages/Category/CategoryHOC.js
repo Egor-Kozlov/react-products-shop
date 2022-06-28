@@ -13,6 +13,7 @@ const withGraphQL = graphql(GET_PRODUCTS_ONE_CATEGORY, {
 const mapStateToProps = (state) => {
   return {
     currency: state.currencyReducer,
+    // currentCategory: state.categoryReducer,
   };
 };
 

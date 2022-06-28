@@ -2,7 +2,7 @@ import { graphql } from "@apollo/client/react/hoc";
 import { compose } from "recompose";
 import { connect } from "react-redux";
 import { GET_BASKET_PRODUCT } from "../../query/basketProduct";
-import { addToBasket } from "../../store/slices/basket";
+import { addToBasket, removeFromBasket } from "../../store/slices/basket";
 
 const withGraphQL = graphql(GET_BASKET_PRODUCT, {
   options: ({ id = "" }) => ({
@@ -18,4 +18,4 @@ const mapStateToProps = (state) => {
 };
 
 // export default withGraphQL;
-export default compose(withGraphQL, connect(mapStateToProps, { addToBasket }));
+export default compose(withGraphQL, connect(mapStateToProps, { addToBasket, removeFromBasket }));

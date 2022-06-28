@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Header from '../../components/Header/Header'
 import './Category.scss'
 import ReduxWithGraphQL from './CategoryHOC';
 import bigFirstLetter from '../../modules/bigFirstLetter';
@@ -10,7 +9,7 @@ export class Category extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentCategory: 'all',
+            currentCategory: '',
             currentProducts: [],
             isLoadingProducts: false,
         }
@@ -38,11 +37,15 @@ export class Category extends Component {
 
     componentDidMount() {
         this.setState({ isLoadingProducts: true })
+        this.setState({ currentCategory: this.props.currentCategory })
         this.getCategoryProducts()
-        this.setState({ currentCurrency: this.props.currency })
+        console.log(this.state.currentCategory);
     }
 
     componentDidUpdate(prevProps, prevState) {
+        if (prevProps.currentCategory !== this.props.currentCategory) {
+            this.setState({ currentCategory: this.props.currentCategory })
+        }
         if (prevState.currentCategory !== this.state.currentCategory) {
             this.getCategoryProducts()
         }
@@ -51,7 +54,7 @@ export class Category extends Component {
     render() {
         return (
             <div className='category'>
-                <Header onChangeCurrency={this.onChangeCurrency} onClickCategory={this.onClickCategory} client={this.props.client} currentCategory={this.state.currentCategory} />
+                {/* <Header onChangeCurrency={this.onChangeCurrency} onClickCategory={this.onClickCategory} client={this.props.client} currentCategory={this.state.currentCategory} /> */}
                 <div className="wrapper">
                     <h2 className='category__title'>{bigFirstLetter(this.state.currentCategory)}</h2>
                     <ProductsList currentCurrency={this.props.currency} loading={this.state.isLoadingProducts} products={this.state.currentProducts} />

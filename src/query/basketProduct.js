@@ -1,12 +1,23 @@
 import { gql } from "@apollo/client";
 
 export const GET_BASKET_PRODUCT = gql`
-  query getBasketProduct($id: String!) {
-    product(id: $id) {
+  query getBasketProduct($productID: String!) {
+    product(id: $productID) {
       brand
       name
       gallery
       id
+      inStock
+      attributes {
+        id
+        name
+        type
+        items {
+          displayValue
+          value
+          id
+        }
+      }
       prices {
         currency {
           label

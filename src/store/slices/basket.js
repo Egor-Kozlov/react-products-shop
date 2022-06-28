@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const basketSlice = createSlice({
   name: "basket",
-  initialState: [],
+  initialState: localStorage.getItem("basket") ? JSON.parse(localStorage.getItem("basket")) : [],
   reducers: {
     addToBasket: (state, action) => {
       console.log("action: ", action);
@@ -18,9 +18,12 @@ const basketSlice = createSlice({
           image: action.payload.image,
           prices: action.payload.prices,
           attributes: action.payload.attributes,
+          selectedAttributes: action.payload.selectedAttributes,
           count: 1,
         });
       }
+      // add to local storage
+      localStorage.setItem("basket", JSON.stringify(state));
     },
     removeFromBasket: (state, action) => {
       const { id } = action.payload;
@@ -33,6 +36,8 @@ const basketSlice = createSlice({
           1
         );
       }
+      // remove from local storage
+      localStorage.setItem("basket", JSON.stringify(state));
     },
   },
 });
