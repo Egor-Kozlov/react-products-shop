@@ -30,11 +30,11 @@
             color: #1D1F22;
         }
 
-        .item__size {
+        .attribute__item {
             margin-bottom: 7px;
 
-            .size__title{
-                margin-bottom: 7px;
+            .attribute__title {
+                margin-bottom: 8px;
                 font-family: 'Raleway';
                 font-style: normal;
                 font-weight: 400;
@@ -43,41 +43,53 @@
                 color: #1D1F22;
             }
 
-            .size__list {
+            .attribute__value-list {
                 display: flex;
                 flex-direction: row;
-                flex-wrap: nowrap;
+                flex-wrap: wrap;
+                padding-left: 2px;
 
-                .size__item {
-                    width: 24px;
+                .attribute__value {
+                    min-width: 24px;
                     height: 24px;
+                    padding: 4px;
                     margin-right: 8px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background: rgba(255, 255, 255, 0.2);
-                    border: 1px solid #1D1F22;
-
-                    font-family: 'Source Sans Pro';
+                    font-family: 'Raleway';
                     font-style: normal;
                     font-weight: 400;
                     font-size: 14px;
                     line-height: 160%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                     color: #1D1F22;
+                    background: rgba(255, 255, 255, 0.2);
+                    border: 1px solid #1D1F22;
+                    cursor: pointer;
+
+                    &--active{
+                        background: #1D1F22;
+                        color: #FFFFFF;
+                    }
+                }
+
+                .attribute__value--color {
+                    width: 17px;
+                    height: 17px;
+                    margin-right: 8px;
+                    border: #1D1F22 solid 1px;
+                    cursor: pointer;
+
+                    &:last-child {
+                        margin-right: 0px;
+                    }
+
+                    &--active{
+                        border: 2px solid #ffffff;
+                        outline: 2px solid #5ECE7B;
+                    }
                 }
             }
-        }
-
-        .item__color {
-            .color__title {
-                font-family: 'Raleway';
-                font-style: normal;
-                font-weight: 400;
-                font-size: 14px;
-                line-height: 16px;
-                color: #1D1F22;
-            }
-           
         }
     }
 
@@ -95,6 +107,7 @@
             align-items: center;
             justify-content: center;
             border: 1px solid #1D1F22;
+            cursor: pointer;
         }
     }
 
@@ -109,3 +122,4 @@
         }
     }
 }
+

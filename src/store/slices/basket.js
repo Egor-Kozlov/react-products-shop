@@ -1,16 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
+import comparisonObjects from "../../modules/comparisonObjects";
 
 const basketSlice = createSlice({
   name: "basket",
   initialState: localStorage.getItem("basket") ? JSON.parse(localStorage.getItem("basket")) : [],
   reducers: {
     addToBasket: (state, action) => {
-      console.log("action: ", action);
       const { id } = action.payload;
-      const item = state.find((item) => item.id === id);
+      const item = state.find(
+        (item) => item.id === id && comparisonObjects(item.selectedAttributes, action.payload.selectedAttributes)
+      );
       if (item) {
         item.count += 1;
+        console.log("add + 1");
       } else {
+        console.log("add new item");
         state.push({
           id: action.payload.id,
           title: action.payload.title,
@@ -27,7 +31,9 @@ const basketSlice = createSlice({
     },
     removeFromBasket: (state, action) => {
       const { id } = action.payload;
-      const item = state.find((item) => item.id === id);
+      const item = state.find(
+        (item) => item.id === id && comparisonObjects(item.selectedAttributes, action.payload.selectedAttributes)
+      );
       if (item && item.count > 1) {
         item.count -= 1;
       } else if (item && item.count === 1) {

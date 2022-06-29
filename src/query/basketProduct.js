@@ -8,6 +8,7 @@ export const GET_BASKET_PRODUCT = gql`
       gallery
       id
       inStock
+      description
       attributes {
         id
         name

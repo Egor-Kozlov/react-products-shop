@@ -56,6 +56,8 @@ export class Cart extends Component {
                                 price={this.searchCurrentPrice(item)}
                                 onRemoveItem={this.onRemoveItem.bind(this)}
                                 onAddItem={this.onAddItem.bind(this)}
+                                attributes={item.attributes}
+                                selectedAttributes={item.selectedAttributes}
                             />
                         )
                     }

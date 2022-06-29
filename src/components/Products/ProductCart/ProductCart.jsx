@@ -21,6 +21,15 @@ export class ProductCart extends Component {
         this.setState({ mouseOver: false });
     };
 
+    setDefaultPickedAttributes = (attributes) => {
+        return attributes.map((item) => {
+            return {
+                attributeId: item.id,
+                attributeValue: item.items[0].id,
+            };
+        });
+    };
+
     onAddToBasket = (product) => {
         this.props.addToBasket({
             id: product.id,
@@ -29,6 +38,7 @@ export class ProductCart extends Component {
             image: product.image,
             prices: product.prices,
             attributes: product.attributes,
+            selectedAttributes: this.setDefaultPickedAttributes(product.attributes),
         });
     };
 

@@ -33,15 +33,15 @@ export class Basket extends Component {
         }
     }
 
-    onAddItem(id) {
-        this.props.addToBasket({ id });
+    onAddItem(id, selectedAttributes) {
+        this.props.addToBasket({ id, selectedAttributes });
         console.log(this.props);
         console.log(id);
     }
 
-    onRemoveItem(id) {
+    onRemoveItem(id, selectedAttributes) {
         console.log(this.props);
-        this.props.removeFromBasket({ id });
+        this.props.removeFromBasket({ id, selectedAttributes });
     }
 
     searchCurrentPrice(product) {
@@ -75,6 +75,8 @@ export class Basket extends Component {
                                     onRemoveItem={this.onRemoveItem.bind(this)}
                                     onAddItem={this.onAddItem.bind(this)}
                                     price={this.searchCurrentPrice(item)}
+                                    attributes={item.attributes}
+                                    selectedAttributes={item.selectedAttributes}
                                 />
                             ))}
                         </ul>
