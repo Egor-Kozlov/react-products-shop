@@ -1,122 +1,118 @@
 .header {
-    position: sticky;
-    height: 80px;
-    top: -15px;
-    z-index: 40;
-    background: rgb(255, 255, 255);
+  position: sticky;
+  height: 80px;
+  top: -15px;
+  z-index: 40;
+  background: rgb(255, 255, 255);
 
-    a{
-        text-decoration: none;
-        outline: none;
-    }
-    
-    .wrapper {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      height: 65px;
-      position: sticky;
-      top: 0; 
-      z-index: 40;
-    }
+  a {
+    text-decoration: none;
+    outline: none;
+  }
+
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 65px;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+  }
 }
 
 .categories {
-    height: 100%;
+  height: 100%;
 }
 
 .categories__list {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+
+  .categories__item {
     height: 100%;
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 18px;
+    color: #1d1f22;
+    transition: 0.3s;
+    line-height: 120%;
+    font-family: "Raleway";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #1d1f22;
+    cursor: pointer;
+  }
 
-    .categories__item {
-        height: 100%;
-        display: flex;
-        align-items: flex-start;
-        padding: 20px 18px;
-        color: #1d1f22;
-        transition: .3s;
-        line-height: 120%;
-        font-family: 'Raleway';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 16px;
-        text-transform: uppercase;
-        color: #1D1F22;
-        cursor: pointer;
-    }
+  .categories__item--active {
+    border-bottom: #5ece7b 2px solid;
+    color: #5ece7b;
+  }
 
-    .categories__item--active {
-        border-bottom: #5ECE7B 2px solid;
-        color: #5ECE7B;
-    }
-
-    .categories__item:hover {
-        color: #5ECE7B;
-    }
-
+  .categories__item:hover {
+    color: #5ece7b;
+  }
 }
 
-
 .header__logo {
-    width: 41px;
-    height: 41px;
-    position: absolute;
-    top: 13px;
-    left: 50%;
+  width: 41px;
+  height: 41px;
+  position: absolute;
+  top: 13px;
+  left: 50%;
 }
 
 .header__actions {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 95px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 95px;
 }
 
 .currency {
-    width: 38px;
-    height: 29px;
-    border: none;
+  width: 38px;
+  height: 29px;
+  border: none;
 
-    &__option{
-        border: none;
-    }
+  &__option {
+    border: none;
+  }
 }
 
 .cart {
-    width: 38px;
-    height: 38px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+
+  &__counter {
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    top: 2px;
+    right: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    cursor: pointer;
-    
-    &__counter {
-        width: 17px;
-        height: 17px;
-        position: absolute;
-        top: 2px;
-        right: 0px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        background: #1D1F22;
+    border-radius: 50%;
+    background: #1d1f22;
 
-        font-family: 'Roboto';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 14px;
-        line-height: 16px;
-        text-transform: uppercase;
-        color: rgb(255, 255, 255);
-    }
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+  }
 }
-
-

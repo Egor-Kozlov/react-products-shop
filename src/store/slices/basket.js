@@ -12,9 +12,7 @@ const basketSlice = createSlice({
       );
       if (item) {
         item.count += 1;
-        console.log("add + 1");
       } else {
-        console.log("add new item");
         state.push({
           id: action.payload.id,
           title: action.payload.title,

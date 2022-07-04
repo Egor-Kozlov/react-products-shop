@@ -4,12 +4,6 @@ import { connect } from "react-redux";
 import { GET_BASKET_PRODUCT } from "../../../query/basketProduct";
 import { addToBasket, removeFromBasket } from "../../../store/slices/basket";
 
-const withGraphQL = graphql(GET_BASKET_PRODUCT, {
-  options: ({ id = "" }) => ({
-    variables: { id },
-  }),
-});
-
 const mapStateToProps = (state) => {
   return {
     currency: state.currencyReducer,
@@ -18,4 +12,4 @@ const mapStateToProps = (state) => {
 };
 
 // export default withGraphQL;
-export default compose(withGraphQL, connect(mapStateToProps, { addToBasket, removeFromBasket }));
+export default connect(mapStateToProps, { addToBasket, removeFromBasket });

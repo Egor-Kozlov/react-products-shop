@@ -5,7 +5,6 @@ import { store } from "./store/store";
 import Category from "./pages/Category/Category";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Test from "./components/Test/Test";
 import Header from "./components/Header/Header";
 import ProductDetail from "./pages/ProductDetail/ProductDetail";
 import Cart from "./pages/Cart/Cart";
@@ -35,7 +34,7 @@ class App extends Component {
             />
             <Routes>
               <Route exact path="/" element={<Category client={client} currentCategory={this.state.currentCategory} />} />
-              <Route path="/product/:id" element={<ProductDetail client={client} />} />
+              <Route exact path="/product/:id" element={<ProductDetail client={client} />} />
               <Route path="/cart" element={<Cart client={client} />} />\
             </Routes>
           </Router>

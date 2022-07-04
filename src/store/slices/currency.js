@@ -8,7 +8,6 @@ const currencySlice = createSlice({
   },
   reducers: {
     setCurrency: (state, action) => {
-      console.log("action: ", action);
       state.label = action.payload.label;
       state.symbol = action.payload.symbol;
     },

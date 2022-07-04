@@ -7,7 +7,6 @@ const currentCategorySlice = createSlice({
   },
   reducers: {
     setCurrentCategory: (state, action) => {
-      console.log("action: ", action);
       state.categoryName = action.payload;
     },
   },
